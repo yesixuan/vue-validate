@@ -1,7 +1,6 @@
 # [vue-validator](https://github.com/yesixuan/vue-validator)
-[![](https://img.shields.io/badge/Powered%20by-jslib%20base-brightgreen.svg)](https://github.com/yesixuan/vue-validator)
+[![](https://img.shields.io/badge/Powered%20by-yesixuan%20base-brightgreen.svg)](https://github.com/yesixuan/vue-validator)
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/yesixuan/vue-validator/blob/master/LICENSE)
-[![Build Status](https://travis-ci.org/yanhaijing/jslib-base.svg?branch=master)](https://travis-ci.org/yesixuan/vue-validator)
 [![Coveralls](https://img.shields.io/coveralls/yanhaijing/jslib-base.svg)](https://coveralls.io/github/yesixuan/vue-validator)
 [![npm](https://img.shields.io/badge/npm-0.1.0-orange.svg)](https://www.npmjs.com/package/@ignorance/vue-validator)
 [![NPM downloads](http://img.shields.io/npm/dm/jslib-base.svg?style=flat-square)](http://www.npmtrends.com/@ignorance/vue-validator)

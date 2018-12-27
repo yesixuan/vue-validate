@@ -70,8 +70,9 @@ export default class Validator {
     }
   }
 
-  createValidateData(name, res) {
-    this.vm.$set(this.$vec, name, res)
+  createValidateData(res, name, target) {
+    Object.assign(res, target)
+    this.vm.$set(this.$vec, name, target)
   }
 
   /**
@@ -85,7 +86,7 @@ export default class Validator {
     let res = {}
     const required = rules.some(rule => rule.validator === 'required')
     // 创建偏函数，接收部分参数
-    const saveRes = partial(this.createValidateData.bind(this), name)
+    const saveRes = partial(this.createValidateData.bind(this), res, name)
     for (let i = 0; i < rules.length; i++) {
       let rule = rules[i]
       if (val === '' && !required) {
