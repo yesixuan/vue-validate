@@ -59,6 +59,7 @@ export default {
     }
   },
   created() {
+    // 传给校验插件的配置信息
     this.validateData = {
       ref: 'myForm',
       formData: 'formData',
@@ -106,4 +107,60 @@ export default {
 </style>
 ```
 
+## API
+
+### rules.extendRegexp()
+> 扩展正则表达式规则
+
+```js
+import validator, { rules } from '@ignorance/vue-validator'
+
+rules.extendRegexp({
+  ruleName: regexp,
+  // ...
+})
+```  
+
+### rules.extendRegexp()
+> 扩展自定义校验规则
+
+```js
+import validator, { rules } from '@ignorance/vue-validator'
+
+rules.extendValidator({
+  ruleName: validator,
+  // ...
+})
+``` 
+
+### $isError(<name>)
+
+原型方法：校验某字段是否校验不通过。  
+```vue
+<template>
+  <input name="mobile" :class="{ error: $isError('mobile') }" />
+</template>
+```
+
+### $verify(<name>)
+
+原型方法：校验某字段是否校验信息（包含校验是否通过、不通过的提示信息）。
+```js
+$verify('mobile')
+// { pass: false, msg: '请输入正确的手机号码' }
+```
+
+### formRef.validator()
+
+表单引用对象上的校验方法（用于在提交时作整体校验）
+```js
+function submit() {
+  const { pass, msg } = this.$refs.myForm.validator()
+  if (pass) {
+    // do something
+  } else {
+    alert(msg)
+  }
+}
+```
 
