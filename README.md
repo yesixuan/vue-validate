@@ -36,14 +36,19 @@ Vue.use(validator)
 ```vue
 <template>
   <form ref="myForm">
-    <input placeholder="姓名" v-model="formData.name" name="name" :class="{ error: $verify('name') }" />
-    <input placeholder="电话" v-model="formData.tel" name="tel" :class="{ error: $verify('tel') }" />
-    <select name="habit" v-model="formData.habit" :class="{ error: $verify('habit') }">
+    <input placeholder="姓名" v-model="formData.name" name="name" :class="{ error: $isError('name') }" />
+    <input placeholder="电话" v-model="formData.tel" name="tel" :class="{ error: $isError('tel') }" />
+    <select name="habit" v-model="formData.habit" :class="{ error: $isError('habit') }">
       <option value="">空</option>
       <option value="1">睡觉</option>
       <option value="2">打豆豆</option>
+      <option value="3">错误选项</option>
     </select>
     <OwnerBtn text="保存" v-validate:submit.autoCatch="validateData" />
+   
+    姓名：{{ JSON.parse(JSON.stringify($verify('name'))) }}
+    手机：{{ JSON.parse(JSON.stringify($verify('tel'))) }}
+    爱好：{{ JSON.parse(JSON.stringify($verify('habit'))) }}
   </form>
 </template>
 
@@ -71,8 +76,12 @@ export default {
             msg: '必填'
           },
           {
-            validator: val => /^\d+$/.test(val),
-            msg: '只接受数字'
+            validator: /^[a-zA-Z]+$/,
+            msg: '只接受字母'
+          },
+          {
+            validator: 'max:8 min:5',
+            msg: '长度在 5 ~ 8 之间'
           }
         ],
         tel: [
@@ -86,6 +95,9 @@ export default {
           {
             validator: 'required',
             msg: '必填'
+          },
+          {
+            validator: val => val === '1' || val === '2' // 自定义校验函数
           }
         ]
       }

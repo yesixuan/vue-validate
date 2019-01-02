@@ -1,7 +1,16 @@
 {
   "name": "@ignorance/vue-validator",
-  "version": "0.0.36",
+  "version": "0.0.40",
   "description": "vue plugin for form validate",
+  "keywords": [
+    "vue",
+    "validator",
+    "validate",
+    "vue-validate",
+    "vee",
+    "form",
+    "form-validate"
+  ],
   "main": "dist/index.js",
   "jsnext:main": "dist/index.esm.js",
   "module": "dist/index.esm.js",
