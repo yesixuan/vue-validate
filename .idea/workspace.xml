@@ -2,14 +2,33 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fb0c35d3-8d65-45ab-9aee-105a78a3c5e6" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/demo/validate-demo/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demo/validate-demo/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demo/validate-demo/babel.config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demo/validate-demo/package-lock.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demo/validate-demo/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demo/validate-demo/public/favicon.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demo/validate-demo/public/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demo/validate-demo/src/App.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demo/validate-demo/src/assets/logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demo/validate-demo/src/components/HelloWorld.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demo/validate-demo/src/components/OwnerBtn.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demo/validate-demo/src/components/OwnerInput.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demo/validate-demo/src/main.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demo/validate-demo/src/plugins/Rules/Rules.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demo/validate-demo/src/plugins/Validator/Validator.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demo/validate-demo/src/plugins/directives/validate.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demo/validate-demo/src/plugins/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demo/validate-demo/src/plugins/methods/isError.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demo/validate-demo/src/plugins/methods/verify.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demo/validate-demo/src/plugins/utils/functional.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/CHANGELOG.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/demo-amd.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/demo-global.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/demo-node.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/js/require.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Validator/Validator.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Validator/Validator.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/directives/validate.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/directives/validate.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/methods/verify.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/methods/verify.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -27,8 +46,20 @@
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="FIRST">
-              <first_editor relative-caret-position="2268">
-                <caret line="81" column="49" selection-start-line="81" selection-start-column="49" selection-end-line="81" selection-end-column="49" />
+              <first_editor relative-caret-position="224">
+                <caret line="8" selection-start-line="8" selection-end-line="8" />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/demo/validate-demo/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="252">
+                <caret line="9" column="13" lean-forward="true" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
               </first_editor>
               <second_editor />
             </state>
@@ -39,8 +70,8 @@
         <entry file="file://$PROJECT_DIR$/CHANGELOG.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="FIRST">
-              <first_editor relative-caret-position="588">
-                <caret line="21" column="37" selection-start-line="21" selection-start-column="37" selection-end-line="21" selection-end-column="37" />
+              <first_editor relative-caret-position="280">
+                <caret line="10" column="11" selection-start-line="10" selection-start-column="11" selection-end-line="10" selection-end-column="11" />
               </first_editor>
               <second_editor />
             </state>
@@ -50,8 +81,8 @@
       <file leaf-file-name="package.json" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/package.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="9" column="17" lean-forward="true" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
+            <state relative-caret-position="56">
+              <caret line="2" column="20" selection-start-line="2" selection-start-column="20" selection-end-line="2" selection-end-column="20" />
             </state>
           </provider>
         </entry>
@@ -110,15 +141,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="babel.config.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/babel.config.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="224">
-              <caret line="8" selection-start-line="8" selection-end-line="8" />
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -132,6 +154,7 @@
     <findStrings>
       <find>jslib-base</find>
       <find>yanhaijing</find>
+      <find>vue-validator</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -153,8 +176,9 @@
         <option value="$PROJECT_DIR$/src/index.js" />
         <option value="$PROJECT_DIR$/src/Validator/Validator.js" />
         <option value="$PROJECT_DIR$/src/methods/verify.js" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/CHANGELOG.md" />
+        <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/demo/validate-demo/README.md" />
         <option value="$PROJECT_DIR$/package.json" />
       </list>
     </option>
@@ -172,12 +196,13 @@
   </component>
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths>
+      <path value="$PROJECT_DIR$/demo/validate-demo/package.json" />
       <path value="$PROJECT_DIR$/package.json" />
     </packageJsonPaths>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-9" />
-    <option name="y" value="14" />
+    <option name="x" value="-1928" />
+    <option name="y" value="-1" />
     <option name="width" value="1936" />
     <option name="height" value="1056" />
   </component>
@@ -200,24 +225,13 @@
             <path>
               <item name="vue-validator" type="b2602c69:ProjectViewProjectNode" />
               <item name="vue-validator" type="462c0819:PsiDirectoryNode" />
-              <item name="config" type="462c0819:PsiDirectoryNode" />
+              <item name="demo" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="vue-validator" type="b2602c69:ProjectViewProjectNode" />
               <item name="vue-validator" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="vue-validator" type="b2602c69:ProjectViewProjectNode" />
-              <item name="vue-validator" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="methods" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="vue-validator" type="b2602c69:ProjectViewProjectNode" />
-              <item name="vue-validator" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Validator" type="462c0819:PsiDirectoryNode" />
+              <item name="demo" type="462c0819:PsiDirectoryNode" />
+              <item name="validate-demo" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -240,6 +254,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\vue\vue-validator\demo\validate-demo" />
       <recent name="F:\vue\vue-validator\src" />
       <recent name="F:\vue\vue-validator\src\Validator" />
       <recent name="F:\vue\vue-validator" />
@@ -298,7 +313,7 @@
       <option name="presentableId" value="Default" />
       <updated>1545704899460</updated>
       <workItem from="1545704901057" duration="18305000" />
-      <workItem from="1546410188940" duration="3140000" />
+      <workItem from="1546410188940" duration="6625000" />
     </task>
     <task id="LOCAL-00001" summary="feat: 重构整个代码">
       <created>1545817366650</created>
@@ -328,25 +343,39 @@
       <option name="project" value="LOCAL" />
       <updated>1545903526283</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="feat: 重构，并且添加两项更新&#10;&#10;1. 支持配置校验规则的触发时机（可以缺省，默认是在 `blur` 时触发校验）&#10;2. 更新原型方法 `$verify`，不传参数时， 返回所有校验信息">
+      <created>1546413880929</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1546413880929</updated>
+    </task>
+    <task id="LOCAL-00006" summary="feat: 添加关键字信息">
+      <created>1546414720222</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1546414720222</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="21445000" />
+    <option name="totallyTimeSpent" value="24930000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-1928" y="-1" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14120126" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14120126" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5006135" side_tool="true" weight="0.3293348" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.24427481" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.19738276" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.23227917" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="7" sideWeight="0.4993865" visible="true" weight="0.15594329" />
+      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.4993865" visible="true" weight="0.15594329" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -374,7 +403,9 @@
     <MESSAGE value="feat: &#10;1. 支持在安装插件时，扩展正则表达式规则和校验函数&#10;2. 内置长度校验规则，形如 `min:5`、`max:10`、`min:5 max:10`" />
     <MESSAGE value="fix: 修复整体校验时，缺失报错信息的 bug" />
     <MESSAGE value="feat: README 中添加 API 说明" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: README 中添加 API 说明" />
+    <MESSAGE value="feat: 重构，并且添加两项更新&#10;&#10;1. 支持配置校验规则的触发时机（可以缺省，默认是在 `blur` 时触发校验）&#10;2. 更新原型方法 `$verify`，不传参数时， 返回所有校验信息" />
+    <MESSAGE value="feat: 添加关键字信息" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: 添加关键字信息" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/README.md">
@@ -558,21 +589,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
+    <entry file="file://$PROJECT_DIR$/CHANGELOG.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="FIRST">
-          <first_editor relative-caret-position="2268">
-            <caret line="81" column="49" selection-start-line="81" selection-start-column="49" selection-end-line="81" selection-end-column="49" />
+          <first_editor relative-caret-position="280">
+            <caret line="10" column="11" selection-start-line="10" selection-start-column="11" selection-end-line="10" selection-end-column="11" />
           </first_editor>
           <second_editor />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CHANGELOG.md">
+    <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="FIRST">
-          <first_editor relative-caret-position="588">
-            <caret line="21" column="37" selection-start-line="21" selection-start-column="37" selection-end-line="21" selection-end-column="37" />
+          <first_editor relative-caret-position="224">
+            <caret line="8" selection-start-line="8" selection-end-line="8" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/demo/validate-demo/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="252">
+            <caret line="9" column="13" lean-forward="true" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
           </first_editor>
           <second_editor />
         </state>
@@ -580,8 +621,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="9" column="17" lean-forward="true" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
+        <state relative-caret-position="56">
+          <caret line="2" column="20" selection-start-line="2" selection-start-column="20" selection-end-line="2" selection-end-column="20" />
         </state>
       </provider>
     </entry>
