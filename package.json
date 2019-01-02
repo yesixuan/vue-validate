@@ -1,6 +1,6 @@
 {
   "name": "@ignorance/vue-validator",
-  "version": "0.0.41",
+  "version": "0.0.42",
   "description": "vue plugin for form validate",
   "keywords": [
     "vue",
@@ -47,10 +47,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git://github.com/yesixuan/vue-validator.git"
+    "url": "git://github.com/yesixuan/vue-validate.git"
   },
   "bugs": {
-    "url": "https://github.com/yesixuan/vue-validator/issues"
+    "url": "https://github.com/yesixuan/vue-validate/issues"
   },
   "devDependencies": {
     "@babel/cli": "7.1.5",
