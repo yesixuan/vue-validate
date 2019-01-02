@@ -9,7 +9,7 @@ export default  class ValidatePlugin {
     throw new Error('不允许实例化 ValidatePlugin')
   }
   static createValidator(ValidatePlugin, el, binding, vNode, _Vue) {
-    ValidatePlugin.validators[vNode.context._uid] = new Validator(el, binding, vNode, _Vue)
+    ValidatePlugin.validators[`cid_${vNode.context._uid}`] = new Validator(el, binding, vNode, _Vue)
   }
   static install(_Vue, options = {}) {
     if (!ValidatePlugin.validation) {

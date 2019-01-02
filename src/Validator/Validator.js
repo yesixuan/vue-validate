@@ -5,19 +5,16 @@ export default class Validator {
   constructor(el, { arg, value, value: { fields, rules }, modifiers }, { context }, _Vue) {
     this.vm = context
     this._Vue = _Vue
-    // this.inputValue = value
     this.ref = context.$refs[value.ref]
     this.ref.validator = this.checkAll.bind(this) // 让 vue 组件本身可以校验所有数据
     this.formData = context[value.formData]
     this.fields = fields
     this.rules = rules
-    // this.validateData = {} // 存放校验信息的对象
     this.autoCatch = !!modifiers.autoCatch
     this.submitMethod = this.vm[arg]
-    this.prevTarget = null
+    this.listeners = [] // 所有绑定事件的监听者
     this.createReactiveData()
-    this.initEvent(el)
-    // this.initPassData()
+    this.initEachEvent(el)
   }
 
   /* 初始化响应式对象 */
@@ -56,6 +53,8 @@ export default class Validator {
     if (typeof validator === 'string') {
       if (defaultRules.rules[validator]) {
         return defaultRules.rules[validator]
+      } else if (validator === 'required') {
+        return val => !!val
       } else if (/^(m(ax|in):(\d+))(\sm(ax|in):(\d+)){0,1}$/.test(validator)) {
         return this.createLengthValidate(validator)
       } else {
@@ -71,6 +70,7 @@ export default class Validator {
   }
 
   createValidateData(res, name, target) {
+    if (!res.pass && target.pass && res.validator !== target.validator) return
     Object.assign(res, target)
     this.vm.$set(this.$vec, name, target)
   }
@@ -106,6 +106,19 @@ export default class Validator {
     return res
   }
 
+  verifySingle2(val, rule, name) {
+    let res = this.$vec[name]
+    // 创建偏函数，接收部分参数
+    const saveRes = partial(this.createValidateData.bind(this), res, name)
+    // 第一个条件用来排除 值为空，并且非必填 的情况（该情况无需校验其他规则）
+    if (!(val === '' && !this.ref[name].required) && !this.createValidator(rule.validator)(val)) {
+      saveRes({ pass: false, msg: rule.msg || '默认校验不通过消息', validator: rule.validator })
+      return res
+    }
+    saveRes({ pass: true, msg: '', validator: rule.validator })
+    return res
+  }
+
   /**
    * 提交的时候校验所有表单
    * @returns {{pass: boolean}}
@@ -124,19 +137,9 @@ export default class Validator {
     return res
   }
 
-  /**
-   * 这样定义方法才能保证该方法被添作事件监听者的时候 this 的指向符合预期
-   * @param e
-   */
-  changeListener = ({ target: { value, name } }) => {
-    this.verifySingle(value, this.rules[name], name)
-  }
-
-  focusListener = ({ target }) => {
-    if (target.nodeName === 'INPUT' || target.nodeName === 'SELECT' || target.nodeName === 'TEXTAREA') {
-      this.vm.$set(this.$vec, target.name, { pass: true })
-      // this.validateData[target.name] = { pass: true }
-      this.prevTarget = target
+  focusListener = ({ target: { nodeName, name } }) => {
+    if (nodeName === 'INPUT' || nodeName === 'SELECT' || nodeName === 'TEXTAREA') {
+      this.$vec[name] && this.vm.$set(this.$vec, name, { pass: true })
     }
   }
 
@@ -152,28 +155,37 @@ export default class Validator {
     }
   }
 
-  blurListener = e => {
-    if (e.target !== this.prevTarget && this.prevTarget !== null) {
-      this.verifySingle(this.prevTarget.value, this.rules[this.prevTarget.name], this.prevTarget.name)
-      this.vm.$forceUpdate()
-    }
+  bindEvent(domName, rules) {
+    const cloneRules = [ ...rules ]
+    // 将是否必填的信息保存起来
+    this.ref[domName].required = cloneRules.some(rule => rule.validator === 'required')
+    cloneRules.reverse().forEach(rule => {
+      const listener = ({ target }) => {
+        this.verifySingle2(target.value, rule, domName)
+        this.vm.$forceUpdate()
+      }
+      this.ref[domName].addEventListener(rule.trigger || 'blur', listener)
+      // 将解绑事件，添加到解绑列表中
+      this.listeners.push(() => {
+        this.ref[domName].removeEventListener(rule.trigger || 'blur', listener)
+      })
+    })
   }
 
-  initEvent(el) {
-    this.ref.addEventListener('change', this.changeListener)
+  initEachEvent(el) {
+    Object.keys(this.rules).forEach(item => {
+      this.bindEvent(item, this.rules[item])
+    })
     // 当鼠标聚焦时，这个表单元素需要正常
     this.ref.addEventListener('click', this.focusListener, true)
     // 绑定提交事件
     el.addEventListener('click', this.submitListener)
-    // 模拟 blur 事件
-    window.addEventListener('click', this.blurListener, true)
   }
 
   unbindEvent(el) {
-    this.ref.removeEventListener('change', this.changeListener)
     this.ref.removeEventListener('click', this.focusListener, true)
     el.removeEventListener('click', this.submitListener)
-    window.removeEventListener('click', this.blurListener, true)
+    this.listeners.forEach(fn => fn())
   }
 }
 

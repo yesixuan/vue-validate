@@ -78,7 +78,8 @@ export default {
         tel: [
           {
             validator: 'mobile',
-            msg: '请输入正确的手机号码'
+            msg: '请输入正确的手机号码',
+            trigger: 'input' // 可以省略，默认在 blur 时校验
           }
         ],
         habit: [
@@ -121,7 +122,7 @@ rules.extendRegexp({
 })
 ```  
 
-### rules.extendRegexp()
+### rules.extendValidator()
 > 扩展自定义校验规则
 
 ```js
