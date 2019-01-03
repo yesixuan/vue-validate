@@ -19,7 +19,7 @@ export default class Validator {
 
   /* 初始化响应式对象 */
   createReactiveData() {
-    const data = this.fields.reduce((res, key) => ({ ...res, [key]: { pass: true } }), {})
+    const data = this.fields.reduce((res, key) => ({ ...res, [key]: { pass: true, msg: '' } }), {})
     this._Vue.util.defineReactive(this.vm._data, '$vec', data)
   }
 
@@ -88,17 +88,12 @@ export default class Validator {
     // 创建偏函数，接收部分参数
     const saveRes = partial(this.createValidateData.bind(this), res, name)
     for (let i = 0; i < rules.length; i++) {
-      let rule = rules[i]
+      const { msg, validator } = rules[i]
       if (val === '' && !required) {
-        saveRes({ pass: true, msg: '' })
+        saveRes({ pass: true, msg: '', validator })
         return res
-      }
-      if (required && val === '') {
-        saveRes({ pass: false, msg: '必填' })
-        return res
-      }
-      if (val !== '' && rule.validator !== 'required' && !this.createValidator(rule.validator)(val)) {
-        saveRes({ pass: false, msg: rule.msg || '默认校验不通过消息' })
+      } else if (!this.createValidator(validator)(val)) {
+        saveRes({ pass: false, msg: msg || '默认校验不通过消息', validator })
         return res
       }
     }
@@ -106,7 +101,7 @@ export default class Validator {
     return res
   }
 
-  verifySingle2(val, rule, name) {
+  verifyRule(val, rule, name) {
     let res = this.$vec[name]
     // 创建偏函数，接收部分参数
     const saveRes = partial(this.createValidateData.bind(this), res, name)
@@ -139,7 +134,7 @@ export default class Validator {
 
   focusListener = ({ target: { nodeName, name } }) => {
     if (nodeName === 'INPUT' || nodeName === 'SELECT' || nodeName === 'TEXTAREA') {
-      this.$vec[name] && this.vm.$set(this.$vec, name, { pass: true })
+      this.$vec[name] && this.vm.$set(this.$vec, name, { pass: true, msg: '' })
     }
   }
 
@@ -161,13 +156,14 @@ export default class Validator {
     this.ref[domName].required = cloneRules.some(rule => rule.validator === 'required')
     cloneRules.reverse().forEach(rule => {
       const listener = ({ target }) => {
-        this.verifySingle2(target.value, rule, domName)
+        this.verifyRule(target.value, rule, domName)
         this.vm.$forceUpdate()
       }
-      this.ref[domName].addEventListener(rule.trigger || 'blur', listener)
+      const trigger = rule.trigger || 'blur'
+      this.ref[domName].addEventListener(trigger, listener)
       // 将解绑事件，添加到解绑列表中
       this.listeners.push(() => {
-        this.ref[domName].removeEventListener(rule.trigger || 'blur', listener)
+        this.ref[domName].removeEventListener(trigger, listener)
       })
     })
   }
@@ -177,13 +173,13 @@ export default class Validator {
       this.bindEvent(item, this.rules[item])
     })
     // 当鼠标聚焦时，这个表单元素需要正常
-    this.ref.addEventListener('click', this.focusListener, true)
+    this.ref.addEventListener('click', this.focusListener)
     // 绑定提交事件
     el.addEventListener('click', this.submitListener)
   }
 
   unbindEvent(el) {
-    this.ref.removeEventListener('click', this.focusListener, true)
+    this.ref.removeEventListener('click', this.focusListener)
     el.removeEventListener('click', this.submitListener)
     this.listeners.forEach(fn => fn())
   }

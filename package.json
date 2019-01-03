@@ -1,6 +1,6 @@
 {
   "name": "@ignorance/vue-validator",
-  "version": "0.0.42",
+  "version": "0.0.43",
   "description": "vue plugin for form validate",
   "keywords": [
     "vue",

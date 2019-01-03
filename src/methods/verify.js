@@ -6,7 +6,7 @@ const deleteProp = (target, key) => {
 
 const deleteAllProp = target => {
   const newObj = { ...target }
-  Object.keys(newObj).forEach(key => deleteProp(newObj[key], 'validator'))
+  Object.keys(newObj).forEach(key => newObj[key] = deleteProp(newObj[key], 'validator'))
   return newObj
 }
 
