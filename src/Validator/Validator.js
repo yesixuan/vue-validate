@@ -1,5 +1,5 @@
 import defaultRules from '../Rules/Rules' // 默认名改成具名导出
-import { partial } from "../utils/functional"
+import { partial } from '../utils/functional'
 
 export default class Validator {
   constructor(el, { arg, value, value: { fields, rules }, modifiers }, { context }, _Vue) {
@@ -19,7 +19,7 @@ export default class Validator {
 
   /* 初始化响应式对象 */
   createReactiveData() {
-    const data = this.fields.reduce((res, key) => ({ ...res, [key]: { pass: true, msg: '' } }), {})
+    const data = this.fields.reduce((res, key) => ({ ...res, [key]: { valid: true, msg: '' } }), {})
     this._Vue.util.defineReactive(this.vm._data, '$vec', data)
   }
 
@@ -40,7 +40,7 @@ export default class Validator {
     if (p4 && p2 !== p5) {
       p5 === 'ax' ? max = p6 : min = p6
     }
-    if ((min && max) && (~~min > ~~max)) throw '最小长度不能大于最大长度'
+    if ((min && max) && (~~min > ~~max)) throw new Error('最小长度不能大于最大长度')
     return ({length}) => !((min && ~~min > length) || (max && ~~max < length))
   }
 
@@ -58,19 +58,19 @@ export default class Validator {
       } else if (/^(m(ax|in):(\d+))(\sm(ax|in):(\d+)){0,1}$/.test(validator)) {
         return this.createLengthValidate(validator)
       } else {
-        throw `您还未定义 ${validator} 这条规则`
+        throw new Error(`您还未定义 ${validator} 这条规则`)
       }
     } else if (validator instanceof RegExp) {
       return val => validator.test(val)
     } else if (typeof validator === 'function') {
       return validator
     } else {
-      throw 'validator 的值只能为函数或正则表达式'
+      throw new Error('validator 的值只能为函数或正则表达式')
     }
   }
 
   createValidateData(res, name, target) {
-    if (!res.pass && target.pass && res.validator !== target.validator) return
+    if (!res.valid && target.valid && res.validator !== target.validator) return
     Object.assign(res, target)
     this.vm.$set(this.$vec, name, target)
   }
@@ -90,14 +90,14 @@ export default class Validator {
     for (let i = 0; i < rules.length; i++) {
       const { msg, validator } = rules[i]
       if (val === '' && !required) {
-        saveRes({ pass: true, msg: '', validator })
+        saveRes({ valid: true, msg: '', validator })
         return res
       } else if (!this.createValidator(validator)(val)) {
-        saveRes({ pass: false, msg: msg || '默认校验不通过消息', validator })
+        saveRes({ valid: false, msg: msg || '默认校验不通过消息', validator })
         return res
       }
     }
-    saveRes({ pass: true, msg: '' })
+    saveRes({ valid: true, msg: '' })
     return res
   }
 
@@ -107,24 +107,24 @@ export default class Validator {
     const saveRes = partial(this.createValidateData.bind(this), res, name)
     // 第一个条件用来排除 值为空，并且非必填 的情况（该情况无需校验其他规则）
     if (!(val === '' && !this.ref[name].required) && !this.createValidator(rule.validator)(val)) {
-      saveRes({ pass: false, msg: rule.msg || '默认校验不通过消息', validator: rule.validator })
+      saveRes({ valid: false, msg: rule.msg || '默认校验不通过消息', validator: rule.validator })
       return res
     }
-    saveRes({ pass: true, msg: '', validator: rule.validator })
+    saveRes({ valid: true, msg: '', validator: rule.validator })
     return res
   }
 
   /**
    * 提交的时候校验所有表单
-   * @returns {{pass: boolean}}
+   * @returns {{valid: boolean}}
    */
   checkAll() {
     let res = {
-      pass: true
+      valid: true
     }
     this.fields.forEach(item => {
       const checkOne = this.verifySingle(this.formData[item], this.rules[item], item)
-      if (!checkOne.pass && res.pass) {
+      if (!checkOne.valid && res.valid) {
         res = { ...checkOne, name: item }
       }
     })
@@ -134,15 +134,15 @@ export default class Validator {
 
   focusListener = ({ target: { nodeName, name } }) => {
     if (nodeName === 'INPUT' || nodeName === 'SELECT' || nodeName === 'TEXTAREA') {
-      this.$vec[name] && this.vm.$set(this.$vec, name, { pass: true, msg: '' })
+      this.$vec[name] && this.vm.$set(this.$vec, name, { valid: true, msg: '' })
     }
   }
 
   submitListener = e => {
     e.preventDefault()
     if (this.autoCatch) {
-      const { pass } = this.checkAll()
-      if (pass) {
+      const { valid } = this.checkAll()
+      if (valid) {
         this.submitMethod()
       }
     } else {

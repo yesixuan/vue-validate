@@ -1,10 +1,9 @@
-import Validator from './Validator/Validator'
+import Validator, { rules } from './Validator/Validator'
 import validate from './directives/validate'
 import isError from './methods/isError'
 import verify from './methods/verify'
-import { rules } from './Validator/Validator'
 
-export default  class ValidatePlugin {
+export default class ValidatePlugin {
   constructor() {
     throw new Error('不允许实例化 ValidatePlugin')
   }

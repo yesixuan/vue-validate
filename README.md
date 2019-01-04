@@ -160,7 +160,7 @@ rules.extendValidator({
 原型方法：校验某字段是否校验信息（包含校验是否通过、不通过的提示信息）。
 ```js
 $verify('mobile')
-// { pass: false, msg: '请输入正确的手机号码' }
+// { valid: false, msg: '请输入正确的手机号码' }
 ```
 
 ### formRef.validator()
@@ -168,8 +168,8 @@ $verify('mobile')
 表单引用对象上的校验方法（用于在提交时作整体校验）
 ```js
 function submit() {
-  const { pass, msg } = this.$refs.myForm.validator()
-  if (pass) {
+  const { valid, msg } = this.$refs.myForm.validator()
+  if (valid) {
     // do something
   } else {
     alert(msg)

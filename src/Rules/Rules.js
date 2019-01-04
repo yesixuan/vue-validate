@@ -2,7 +2,7 @@ const regexpMap = {
   mobile: /^1\d{10}$/, // 手机校验
   url: /^((https|http|ftp|rtsp|mms)?:\/\/)[^\s]+/, // 网址校验
   identificationCard: /^\d{13,17}[0-9xX]$/, // 身份证号码格式校验
-  tel: /(^(\d{3,4}-)?\d{7,8})$|(^1\d{10}$)/, // 校验电话号码
+  tel: /(^(\d{3,4}-)?\d{7,8})$|(^1\d{10}$)/ // 校验电话号码
 }
 
 class Rules {
