@@ -2,7 +2,7 @@ import defaultRules from '../Rules/Rules' // 默认名改成具名导出
 import { partial } from '../utils/functional'
 
 export default class Validator {
-  constructor(el, { arg, value, value: { fields, rules }, modifiers }, { context }, _Vue) {
+  constructor(el, { arg, value, value: { fields, rules, trigger = 'blur' }, modifiers }, { context }, _Vue) {
     this.vm = context
     this._Vue = _Vue
     this.ref = context.$refs[value.ref]
@@ -10,6 +10,7 @@ export default class Validator {
     this.formData = context[value.formData]
     this.fields = fields
     this.rules = rules
+    this.trigger = trigger
     this.autoCatch = !!modifiers.autoCatch
     this.submitMethod = this.vm[arg]
     this.listeners = [] // 所有绑定事件的监听者
@@ -159,7 +160,7 @@ export default class Validator {
         this.verifyRule(target.value, rule, domName)
         this.vm.$forceUpdate()
       }
-      const trigger = rule.trigger || 'blur'
+      const trigger = rule.trigger || this.trigger
       this.ref[domName].addEventListener(trigger, listener)
       // 将解绑事件，添加到解绑列表中
       this.listeners.push(() => {
