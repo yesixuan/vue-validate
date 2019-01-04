@@ -83,7 +83,7 @@ export default class Validator {
    * @returns {*}
    */
   verifySingle(val, rules, name) {
-    let res = {}
+    let res = { valid: true, msg: '' }
     const required = rules.some(rule => rule.validator === 'required')
     // 创建偏函数，接收部分参数
     const saveRes = partial(this.createValidateData.bind(this), res, name)
