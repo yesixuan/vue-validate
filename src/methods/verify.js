@@ -15,7 +15,7 @@ export default function(name) {
   return name
     ? verifyData
       ? deleteProp(verifyData[name], 'validator')
-      : { pass: true, msg: '' }
+      : { valid: true, msg: '' }
     : verifyData
       ? deleteAllProp(verifyData)
       : {}
