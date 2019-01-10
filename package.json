@@ -1,6 +1,6 @@
 {
   "name": "@ignorance/vue-validator",
-  "version": "0.0.44",
+  "version": "0.0.50",
   "description": "vue plugin for form validate",
   "keywords": [
     "vue",
@@ -84,6 +84,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.1.2",
+    "@ignorance/validator": "0.0.16",
     "@jsmini/clone": "0.3.0",
     "@jsmini/console": "0.6.0",
     "@jsmini/event": "0.5.1",

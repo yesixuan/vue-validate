@@ -30,6 +30,12 @@
 </template>
 
 <script>
+// import Vily, { rules } from '@ignorance/validator'
+// import Vily, { rules } from '../pure-validate'
+// rules.extendRegexp({
+//   onlyNumber: /^\d+$/
+// })
+
 import OwnerInput from './OwnerInput'
 import OwnerBtn from './OwnerBtn'
 export default {
@@ -67,8 +73,8 @@ export default {
             msg: '必填'
           },
           {
-            validator: /^[a-zA-Z]+$/,
-            msg: '只接受字母'
+            validator: 'onlyNumber',
+            msg: '只接受数字'
           },
           {
             validator: 'max:8 min:5',
@@ -94,7 +100,12 @@ export default {
     }
   },
   mounted() {
+    // const vily = new Vily(this.formData, this.validateData.rules)
     // console.log(this.$refs.myForm.name)
+    // setInterval(() => {
+    //   console.log(vily.isError('name'))
+    //   console.log(vily.verify('tel'))
+    // }, 6000)
   }
 }
 </script>

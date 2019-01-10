@@ -5,6 +5,9 @@ import App from './App.vue'
 
 Vue.config.productionTip = false
 Vue.use(validator)
+rules.extendRegexp({
+  onlyNumber: /^\d+$/
+})
 
 new Vue({
   render: h => h(App),

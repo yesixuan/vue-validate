@@ -20,3 +20,7 @@
 
 1. 支持配置校验规则的触发时机（可以缺省，默认是在 `blur` 时触发校验）
 2. 更新原型方法 `$verify`，不传参数时， 返回所有校验信息  
+
+## 0.0.50 / 2019-01-09
+
+1. 将 JS 通用校验规则抽离到 [@ignorance/validator](https://www.npmjs.com/package/@ignorance/validator) 中  

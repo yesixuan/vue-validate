@@ -1,4 +1,8 @@
-import defaultRules from '../Rules/Rules' // 默认名改成具名导出
+import CommonValidator, {
+  rules as defaultRules,
+  verifySingle,
+  createValidator
+} from '@ignorance/validator'
 import { partial } from '../utils/functional'
 
 export default class Validator {
@@ -14,13 +18,15 @@ export default class Validator {
     this.autoCatch = !!modifiers.autoCatch
     this.submitMethod = this.vm[arg]
     this.listeners = [] // 所有绑定事件的监听者
+    this.commonValidator = new CommonValidator(this.formData, this.rules, false)
     this.createReactiveData()
     this.initEachEvent(el)
   }
 
   /* 初始化响应式对象 */
   createReactiveData() {
-    const data = this.fields.reduce((res, key) => ({ ...res, [key]: { valid: true, msg: '' } }), {})
+    // const data = this.fields.reduce((res, key) => ({ ...res, [key]: { valid: true, msg: '' } }), {})
+    const data = this.commonValidator.initVRes()
     this._Vue.util.defineReactive(this.vm._data, '$vec', data)
   }
 
@@ -28,52 +34,11 @@ export default class Validator {
     return this.vm._data.$vec
   }
 
-  /**
-   * 将形如："min:5""max:8""min:5 max:8" 的字符串解析成校验字符串长度的校验函数
-   * @param rule: string
-   * @returns {function({length: number}): boolean}
-   */
-  createLengthValidate(rule) {
-    const reg = /^(m(ax|in):(\d+))(\sm(ax|in):(\d+)){0,1}$/
-    const [ , , p2, p3, p4, p5, p6 ] = rule.match(reg)
-    let min, max
-    p2 === 'in' ? min = p3 : max = p3
-    if (p4 && p2 !== p5) {
-      p5 === 'ax' ? max = p6 : min = p6
-    }
-    if ((min && max) && (~~min > ~~max)) throw new Error('最小长度不能大于最大长度')
-    return ({length}) => !((min && ~~min > length) || (max && ~~max < length))
-  }
-
-  /**
-   * 验证 validator 的值类型，将其统一包装成函数
-   * @param validator
-   * @returns Function
-   */
-  createValidator(validator) {
-    if (typeof validator === 'string') {
-      if (defaultRules.rules[validator]) {
-        return defaultRules.rules[validator]
-      } else if (validator === 'required') {
-        return val => !!val
-      } else if (/^(m(ax|in):(\d+))(\sm(ax|in):(\d+)){0,1}$/.test(validator)) {
-        return this.createLengthValidate(validator)
-      } else {
-        throw new Error(`您还未定义 ${validator} 这条规则`)
-      }
-    } else if (validator instanceof RegExp) {
-      return val => validator.test(val)
-    } else if (typeof validator === 'function') {
-      return validator
-    } else {
-      throw new Error('validator 的值只能为函数或正则表达式')
-    }
-  }
-
   createValidateData(res, name, target) {
+    // 由不通过变成通过，需要判断是否是同一条规则导致的，否则不予修改
     if (!res.valid && target.valid && res.validator !== target.validator) return
     Object.assign(res, target)
-    this.vm.$set(this.$vec, name, target)
+    this.vm.$set(this.$vec, name, res)
   }
 
   /**
@@ -84,30 +49,17 @@ export default class Validator {
    * @returns {*}
    */
   verifySingle(val, rules, name) {
-    let res = { valid: true, msg: '' }
-    const required = rules.some(rule => rule.validator === 'required')
-    // 创建偏函数，接收部分参数
-    const saveRes = partial(this.createValidateData.bind(this), res, name)
-    for (let i = 0; i < rules.length; i++) {
-      const { msg, validator } = rules[i]
-      if (val === '' && !required) {
-        saveRes({ valid: true, msg: '', validator })
-        return res
-      } else if (!this.createValidator(validator)(val)) {
-        saveRes({ valid: false, msg: msg || '默认校验不通过消息', validator })
-        return res
-      }
-    }
-    saveRes({ valid: true, msg: '' })
+    const res = { ...this.$vec[name], ...verifySingle(name, val, rules), dirty: true } // 整体校验时，全部变脏
+    this.vm.$set(this.$vec, name, res)
     return res
   }
 
   verifyRule(val, rule, name) {
-    let res = this.$vec[name]
+    let res = { ...this.$vec[name], dirty: true }
     // 创建偏函数，接收部分参数
     const saveRes = partial(this.createValidateData.bind(this), res, name)
     // 第一个条件用来排除 值为空，并且非必填 的情况（该情况无需校验其他规则）
-    if (!(val === '' && !this.ref[name].required) && !this.createValidator(rule.validator)(val)) {
+    if (!(val === '' && !this.ref[name].required) && !createValidator(rule.validator)(val)) {
       saveRes({ valid: false, msg: rule.msg || '默认校验不通过消息', validator: rule.validator })
       return res
     }

@@ -6,7 +6,7 @@ const deleteProp = (target, key) => {
 
 const deleteAllProp = target => {
   const newObj = { ...target }
-  Object.keys(newObj).forEach(key => newObj[key] = deleteProp(newObj[key], 'validator'))
+  Object.keys(newObj).forEach(key => newObj[key] = deleteProp(newObj[key], 'validator')) // eslint-disable-line
   return newObj
 }
 
@@ -15,7 +15,7 @@ export default function(name) {
   return name
     ? verifyData
       ? deleteProp(verifyData[name], 'validator')
-      : { pass: true, msg: '' }
+      : { valid: true, msg: '' }
     : verifyData
       ? deleteAllProp(verifyData)
       : {}
